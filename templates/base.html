@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Barcode Scanner{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <span class="logo">📦</span>
+    <h1>Product Barcode Scanner</h1>
+    <div class="header-status">
+      <span class="dot" id="statusDot"></span>
+      <span id="statusText">Connecting…</span>
+    </div>
+  </header>
+
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer>
+    <span>Session scans: <b id="footerCount">0</b></span>
+    <span>Duplicates skipped: <b id="footerDups">0</b></span>
+    <span>Timer: <b id="footerTimer">00:00</b></span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+  <script src="{{ url_for('static', filename='js/scanner.js') }}"></script>
+</body>
+</html>

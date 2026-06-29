@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Barcode Scanner{% endblock %}
+
+{% block content %}
+<div class="layout">
+
+  <!-- ── Camera Panel ── -->
+  <div class="camera-panel">
+    <div class="panel-title">
+      <span class="live-dot" id="liveDot"></span>
+      <span id="camLabel">LIVE CAMERA</span>
+    </div>
+
+    <div class="manual-box">
+  <input 
+    type="text" 
+    id="manualBarcode" 
+    placeholder="Enter barcode number manually"
+  >
+  <button class="btn btn-success" onclick="manualScan()">🔍 Search/Add</button>
+</div>
+
+    <div id="scannerWrap">
+      <div id="scanner"></div>
+      <div class="scan-overlay">
+        <div class="scan-frame">
+          <div class="scan-line"></div>
+          <span class="tl"></span><span class="tr"></span>
+          <span class="bl"></span><span class="br"></span>
+        </div>
+      </div>
+      <div class="cam-off" id="camOff">
+        <div class="cam-off-icon">📷</div>
+        <p>Camera stopped</p>
+        <small>Click Start Camera to resume</small>
+      </div>
+    </div>
+
+    <div id="ack"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-danger" id="btnEnd" onclick="stopCamera()">⏹ End Scanning</button>
+      <button class="btn btn-success hidden" id="btnStart" onclick="startCamera()">▶ Start Camera</button>
+      <button class="btn btn-outline" onclick="clearTable()">🗑 Clear All</button>
+    </div>
+  </div>
+
+  <!-- ── Table Panel ── -->
+  <div class="table-panel">
+    <div class="table-header">
+      <span class="panel-title">🗂 SCANNED PRODUCTS</span>
+      <span class="badge" id="countBadge">0 items</span>
+    </div>
+
+    <div id="emptyState" class="empty-state">
+      <div class="empty-icon">🔍</div>
+      <p>No products scanned yet.<br>Point camera at a barcode to begin.</p>
+    </div>
+
+    <div class="table-scroll">
+      <table id="productTable" class="hidden">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Barcode</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>MFG Date</th>
+            <th>EXP Date</th>
+            <th>HSN Code</th>
+            <th>Status</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
